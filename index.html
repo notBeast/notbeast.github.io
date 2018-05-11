@@ -1,19 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script>
+function getVote(int) {
+  if (window.XMLHttpRequest) {
+    // code for IE7+, Firefox, Chrome, Opera, Safari
+    xmlhttp=new XMLHttpRequest();
+  } else {  // code for IE6, IE5
+    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+  xmlhttp.onreadystatechange=function() {
+    if (this.readyState==4 && this.status==200) {
+      document.getElementById("poll").innerHTML=this.responseText;
+    }
+  }
+  xmlhttp.open("GET","poll_vote.php?vote="+int,true);
+  xmlhttp.send();
+}
+</script>
 </head>
 <body>
 
 <div id="poll">
-<h3>Do you want Interstellar as a Lead Helper</h3>
+<h3>Should Interstellar get Lead Helper?</h3>
 <form>
-No:
+Yes:
 <input type="radio" name="vote" value="0" onclick="getVote(this.value)">
-<br>CRT can decide:
+<br>No:
 <input type="radio" name="vote" value="1" onclick="getVote(this.value)">
 </form>
 </div>
 
 </body>
- </body>
 </html>
